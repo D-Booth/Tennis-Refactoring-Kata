@@ -39,33 +39,33 @@ namespace Tennis
 		[TestCase( 4,  6, "Win for player2")]
 		[TestCase(16, 14, "Win for player1")]
 		[TestCase(14, 16, "Win for player2")]
-		public void CheckTennisGame(int player1Score, int player2Score, string expectedScore)
+        public void CheckTennisGame(int player1Score, int player2Score, string expectedScore)
 		{
-			var game = new TennisGame("player1", "player2");
+            TennisGame clGame = new TennisGame("player1", "player2");
 
 			var highestScore = Math.Max(player1Score, player2Score);
-			for (var i = 0; i < highestScore; i++)
+			for (int i = 0; i < highestScore; i++)
 			{
 				if (i < player1Score)
-					game.WonPoint("player1");
+                    clGame.WonPoint("player1");
 				if (i < player2Score)
-					game.WonPoint("player2");
+                    clGame.WonPoint("player2");
 			}
-			Assert.AreEqual(expectedScore, game.GetScore());
+			Assert.AreEqual(expectedScore, clGame.GetScore());
 		}
 
 		[Test]
 		public void CheckRealisticGame()
 		{
-			var game = new TennisGame("player1", "player2");
+            TennisGame clGame = new TennisGame("player1", "player2");
 
-			string[] points = { "player1", "player1", "player2", "player2", "player1", "player1" };
-			string[] expectedScores = { "Fifteen-Love", "Thirty-Love", "Thirty-Fifteen", "Thirty-All", "Forty-Thirty", "Win for player1" };
+			string[] asPoints = { "player1", "player1", "player2", "player2", "player1", "player1" };
+			string[] asExpectedScores = { "Fifteen-Love", "Thirty-Love", "Thirty-Fifteen", "Thirty-All", "Forty-Thirty", "Win for player1" };
 
-			for (var i = 0; i < 6; i++)
+			for (int i = 0; i < 6; i++)
 			{
-				game.WonPoint(points[i]);
-				Assert.AreEqual(expectedScores[i], game.GetScore());
+                clGame.WonPoint(asPoints[i]);
+				Assert.AreEqual(asExpectedScores[i], clGame.GetScore());
 			}
 		}
 	}
